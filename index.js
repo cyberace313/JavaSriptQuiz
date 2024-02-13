@@ -5,7 +5,7 @@
 // explanation should be the "explanation" div
 const statement = document.getElementById("statement");
 const explanation = document.getElementById("explanation"); 
-const options = document.querySelectorAll("button");
+const options = document.querySelector("#options").children;
 const scoreEl = document.querySelector(".score");
 
 let score = 0;
@@ -13,7 +13,7 @@ let score = 0;
 // Its value should be an object with a statement, true/false answer, and explanation 
 
 const questions = [
-    {question: `typeof ['J', 'S'] === 'array'`, answer: "false"}
+    {question: `typeof ['J', 'S'] === 'array'`, answer: "false", description: "Arrays have the type 'object'. In JavaScript everything is either a primitive data type or an object. Arrays are a kind of object with special properties."}
 ];
 statement.textContent = questions[0].question;   
 console.log(questions[0].answer)
@@ -24,12 +24,26 @@ for (let i = 0; i < options.length; i++) {
             options[i].style.backgroundColor = "green";
             score++;
             scoreEl.textContent = score;
+           
         } else {
             options[i].style.backgroundColor = "red"
         }
+        explanation.textContent = questions[0].description;
+        disableBtns();
     })
 }
 
+const disableBtns = () => {
+    for (let i = 0; i < options.length; i++) {
+        options[i].disabled = true;
+    }
+}
+
+const enableBtn = () => {
+    for (let i = 0; i < options.length; i++) {
+        options[i].disabled = false;
+    }
+}
 
 
 
